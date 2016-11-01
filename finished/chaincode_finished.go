@@ -118,8 +118,8 @@ func (t *SimpleChaincode) read(stub *shim.ChaincodeStub, args []string) ([]byte,
 func (t *SimpleChaincode) get_username(stub *shim.ChaincodeStub) ([]byte, error) {
 
 	bytes, err := stub.GetCallerCertificate();
-	if err != nil { return "", errors.New("Couldn't retrieve caller certificate") }
+	if err != nil { return nil, errors.New("Couldn't retrieve caller certificate") }
 	x509Cert, err := x509.ParseCertificate(bytes); // Extract Certificate from result of GetCallerCertificate						
-	if err != nil { return "", errors.New("Couldn't parse certificate")	}														
+	if err != nil { return nil, errors.New("Couldn't parse certificate")	}														
 	return []byte(x509Cert.Subject.CommonName), nil
 }
