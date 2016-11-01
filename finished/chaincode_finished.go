@@ -113,3 +113,21 @@ func (t *SimpleChaincode) read(stub *shim.ChaincodeStub, args []string) ([]byte,
 
 	return valAsbytes, nil
 }
+
+func (t *SimpleChaincode) getAttr(stub *shim.ChaincodeStub, args []string) ([]byte, error) {
+	var key, jsonResp string
+	var err error
+
+	if len(args) != 1 {
+		return nil, errors.New("Incorrect number of arguments. Expecting name of the key to query")
+	}
+	
+	key = args[0]
+	callerInfo, err := stub.ReadCertAttribute("role")
+	if err != nil {
+		jsonResp = "{\"Error\":\"Failed to get info for " + key + "\"}"
+		return nil, errors.New(jsonResp)
+	}
+	
+	return callerInfo
+}
