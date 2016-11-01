@@ -115,7 +115,7 @@ func (t *SimpleChaincode) read(stub *shim.ChaincodeStub, args []string) ([]byte,
 
 	return valAsbytes, nil
 }
-func (t *SimpleChaincode) get_username(stub *shim.ChaincodeStub) ([]byte, error) {
+func (t *SimpleChaincode) get_username(stub *shim.ChaincodeStub, args []string) ([]byte, error) {
 
 	bytes, err := stub.GetCallerCertificate();
 	if err != nil { return nil, errors.New("Couldn't retrieve caller certificate") }
