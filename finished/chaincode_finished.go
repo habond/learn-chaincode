@@ -129,5 +129,5 @@ func (t *SimpleChaincode) getAttr(stub *shim.ChaincodeStub, args []string) ([]by
 		return nil, errors.New(jsonResp)
 	}
 	
-	return callerInfo
+	return callerInfo, nil
 }
